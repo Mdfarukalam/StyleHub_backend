@@ -12,21 +12,22 @@ const Login = async (req, res) => {
             })
         };
         const RegisterUser = await User.findOne({ Email })
+        console.log(RegisterUser,"RegisterUser")
         if (!RegisterUser) {
-            return res.status(409).json({
+            return res.status(400).json({
                 message: "User not registered",
 
             })
 
         }
 
-        // const matchpassword = await bcrypt.compare(Password, RegisterUser.Password)
-        // if (!matchpassword) {
-        //     return res.status(400).json({
-        //         message: "Invalid password",
-        //     })
-        // }
-        // Generate JWT Token
+        const matchpassword = await bcrypt.compare(Password, RegisterUser.Password)
+        if (!matchpassword) {
+            return res.status(400).json({
+                message: "Invalid password",
+            })
+        }
+    
         const token = jwt.sign(
             { id: RegisterUser._id },
             process.env.JWT_SECRET,
