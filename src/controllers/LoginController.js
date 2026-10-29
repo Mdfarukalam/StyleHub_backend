@@ -20,12 +20,12 @@ const Login = async (req, res) => {
 
         }
 
-        const matchpassword = await bcrypt.compare(Password, RegisterUser.Password)
-        if (!matchpassword) {
-            return res.status(400).json({
-                message: "Invalid password",
-            })
-        }
+        // const matchpassword = await bcrypt.compare(Password, RegisterUser.Password)
+        // if (!matchpassword) {
+        //     return res.status(400).json({
+        //         message: "Invalid password",
+        //     })
+        // }
         // Generate JWT Token
         const token = jwt.sign(
             { id: RegisterUser._id },
