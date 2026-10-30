@@ -19,6 +19,10 @@ import AddTopProduct from "../controllers/AdminControllers/TopProducts.js";
 import EditeTopProduct from "../controllers/AdminControllers/EditTopProduct.js";
 import GetTopProduct from "../controllers/AdminControllers/ListTopProduct.js";
 import DeletedTopProduct from "../controllers/AdminControllers/DeleteTopProduct.js";
+import AddArrivalsProduct from "../controllers/AdminControllers/ArrivalsProduct.js";
+import EditArrivalsProduct from "../controllers/AdminControllers/EditArrivalsProduct.js";
+import ListArrivalsProduct from "../controllers/AdminControllers/ListArrivalsProduct.js";
+import DeleteArrivalsProduct from "../controllers/AdminControllers/DeleteArrivalsProduct.js";
 const Adminrouter = express.Router();
 
 Adminrouter.post("/LoginAdmin", LoginAdmin);
@@ -39,5 +43,9 @@ Adminrouter.post("/AddTopProducts",adminMiddleware,AddTopProduct)
 Adminrouter.put("/EditeTopProducts",adminMiddleware,EditeTopProduct)
 Adminrouter.get("/GetTopProducts",adminMiddleware,GetTopProduct)
 Adminrouter.delete("/DeletedTopProducts", adminMiddleware,DeletedTopProduct);
+Adminrouter.post("/AddArrivalsProducts",adminMiddleware,AddArrivalsProduct)
+Adminrouter.put("/EditArrivalsProducts",adminMiddleware,EditArrivalsProduct)
+Adminrouter.get("/ListArrivalsProducts",adminMiddleware,ListArrivalsProduct)
+Adminrouter.delete("/DeleteArrivalsProducts", adminMiddleware,DeleteArrivalsProduct);
 
 export default Adminrouter;
