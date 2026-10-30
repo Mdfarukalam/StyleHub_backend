@@ -11,6 +11,14 @@ import DeleteWomenProduct from "../controllers/AdminControllers/DeleteWomenProdu
 import AddkidProduct from "../controllers/AdminControllers/KidProduct.js";
 import EditeKidProduct from "../controllers/AdminControllers/EditkidProduct.js";
 import DeleteKidProduct from "../controllers/AdminControllers/DeleteKid.js";
+import GetAllUser from "../controllers/AdminControllers/UserController.js";
+import ListMenProduct from "../controllers/AdminControllers/ListMenPrdouct.js";
+import ListWomenProduct from "../controllers/AdminControllers/ListWomenProduct.js";
+import GetKid from "../controllers/AdminControllers/ListKid.js";
+import AddTopProduct from "../controllers/AdminControllers/TopProducts.js";
+import EditeTopProduct from "../controllers/AdminControllers/EditTopProduct.js";
+import GetTopProduct from "../controllers/AdminControllers/ListTopProduct.js";
+import DeletedTopProduct from "../controllers/AdminControllers/DeleteTopProduct.js";
 const Adminrouter = express.Router();
 
 Adminrouter.post("/LoginAdmin", LoginAdmin);
@@ -23,5 +31,13 @@ Adminrouter.delete("/DeleteWomenProducts", adminMiddleware, DeleteWomenProduct);
 Adminrouter.post("/AddkidProducts",adminMiddleware,AddkidProduct)
 Adminrouter.put("/EditeKidProducts",adminMiddleware,EditeKidProduct)
 Adminrouter.delete("/DeleteKidProducts", adminMiddleware, DeleteKidProduct);
+Adminrouter.get("/ListMenProducts",adminMiddleware,ListMenProduct)
+Adminrouter.get("/GetAllUsers",adminMiddleware,GetAllUser)
+Adminrouter.get("/ListWomenProducts",adminMiddleware,ListWomenProduct)
+Adminrouter.get("/GetKids",adminMiddleware,GetKid)
+Adminrouter.post("/AddTopProducts",adminMiddleware,AddTopProduct)
+Adminrouter.put("/EditeTopProducts",adminMiddleware,EditeTopProduct)
+Adminrouter.get("/GetTopProducts",adminMiddleware,GetTopProduct)
+Adminrouter.delete("/DeletedTopProducts", adminMiddleware,DeletedTopProduct);
 
 export default Adminrouter;
