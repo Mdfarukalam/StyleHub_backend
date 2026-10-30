@@ -9,4 +9,5 @@ const router = express.Router();
 router.post("/signup", signup);
 router.post("/Login", Login);
 router.get("/Profile", authMiddleware,Profile);
+
 export default router;

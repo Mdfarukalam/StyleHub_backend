@@ -2,6 +2,7 @@
 import express from "express";
 import cors from "cors";
 import router from "./routes/authRoutes.js";
+import Adminrouter from "./routes/adminAuthRoutes.js";
 
 const app = express();
 
@@ -13,5 +14,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", router);
+app.use("/api/admin", Adminrouter);
 
 export default app;
