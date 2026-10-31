@@ -63,7 +63,10 @@ const ArrivalsProductSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-})
+},  {
+    timestamps: true,
+  }
+)
 
 const ArrivalsProduct = mongoose.model('ArrivalsProduct', ArrivalsProductSchema)
 export default ArrivalsProduct

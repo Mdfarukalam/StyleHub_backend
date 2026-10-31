@@ -10,7 +10,11 @@ const adminloginSchema = new mongoose.Schema({
         type: String,
         required: true,
     }
-})
+},
+  {
+    timestamps: true,
+  }
+)
 
 const adminlogin= mongoose.model('admin',adminloginSchema)
 export default adminlogin
