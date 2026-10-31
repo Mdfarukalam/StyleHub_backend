@@ -3,8 +3,8 @@ import bcrypt from "bcryptjs";
 
  const signup = async (Req, res) => {
     try {
-        const { fullName, Email, Password } = Req.body
-        if (!fullName || !Email || !Password) {
+        const { fullName, Email, Password,phoneNumber } = Req.body
+        if (!fullName || !Email || !Password || !phoneNumber) {
             return res.status(400).json({ message: "All fields are required", })
 
         };
@@ -19,6 +19,7 @@ const hashedPassword = await bcrypt.hash(Password, 10);
             {
                 fullName,
                 Email,
+                phoneNumber,
                 Password: hashedPassword
             }
         );
@@ -28,6 +29,7 @@ const hashedPassword = await bcrypt.hash(Password, 10);
                 id: UserCreate.id,
                 fullName: UserCreate.fullName,
                 Email: UserCreate.Email,
+                phoneNumber:UserCreate.phoneNumber
             }
         })
     }
