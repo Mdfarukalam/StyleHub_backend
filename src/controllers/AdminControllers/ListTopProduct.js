@@ -2,7 +2,7 @@ import TopProduct from "../../models/AdminModel/TopProduct.js";
 const GetTopProduct = async(req,res)=>{
     try{
  const fetchAllKid = await TopProduct.find().sort({_id:-1})
- return res.status(400).json({
+ return res.status(200).json({
        message: "Top Product fetched successfully",
       TopProduct: fetchAllKid
  })

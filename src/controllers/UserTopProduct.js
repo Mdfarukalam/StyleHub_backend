@@ -2,7 +2,7 @@
  const UserGetTopProduct = async(req,res)=>{
     try{
  const fetchAllKid = await TopProduct.find().sort({_id:-1})
- return res.status(400).json({
+ return res.status(200).json({
        message: "User Top Product fetched successfully",
       UserTopProduct: fetchAllKid
  })
