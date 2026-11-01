@@ -3,7 +3,7 @@ import KidProduct from "../../models/AdminModel/KidProduct.js";
 const GetKid = async(req,res)=>{
     try{
  const fetchAllKid = await KidProduct.find().sort({_id:-1})
- return res.status(400).json({
+ return res.status(200).json({
        message: "Kid fetched successfully",
       Kid: fetchAllKid
  })
