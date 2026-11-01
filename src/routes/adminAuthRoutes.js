@@ -36,6 +36,8 @@ import EditArrivalsProduct from "../controllers/AdminControllers/EditArrivalsPro
 import ListArrivalsProduct from "../controllers/AdminControllers/ListArrivalsProduct.js";
 import DeleteArrivalsProduct from "../controllers/AdminControllers/DeleteArrivalsProduct.js";
 
+import DeletedUser from "../controllers/AdminControllers/DeleteUser.js";
+
 const Adminrouter = express.Router();
 
 /**
@@ -587,6 +589,29 @@ Adminrouter.get("/ListArrivalsProducts", adminMiddleware, ListArrivalsProduct);
  *         description: New arrival deleted successfully
  */
 Adminrouter.delete("/DeleteArrivalsProducts", adminMiddleware, DeleteArrivalsProduct);
+
+
+
+/**
+ * @swagger
+ * /api/admin/DeleteArrivalsProducts:
+ *   delete:
+ *     summary: Delete New Arrival Product
+ *     tags: [New Arrivals]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/DeleteProduct'
+ *     responses:
+ *       200:
+ *         description: New arrival deleted successfully
+ */
+Adminrouter.delete("/DeletedUsers", adminMiddleware, DeletedUser);
+ 
 
 export default Adminrouter;
 
