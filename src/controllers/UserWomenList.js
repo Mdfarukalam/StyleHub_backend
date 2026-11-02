@@ -6,7 +6,7 @@
 
   return res.status(200).json({
    message: "Men Product fetched successfully",
-      UserMenProducts: GetUser_Men
+      UserwomenProducts: GetUser_Men
  })
     }
     catch(error){
