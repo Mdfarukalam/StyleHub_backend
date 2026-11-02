@@ -161,7 +161,7 @@ router.get("/Profile", authMiddleware, Profile);
  *       401:
  *         description: Unauthorized
  */
-router.get("/Userkidlists", authMiddleware, Userkidlist);
+router.get("/Userkidlists", Userkidlist);
 
 
 /**
@@ -178,7 +178,7 @@ router.get("/Userkidlists", authMiddleware, Userkidlist);
  *       401:
  *         description: Unauthorized
  */
-router.get("/UserWomenlists", authMiddleware, UserWomenlist);
+router.get("/UserWomenlists", UserWomenlist);
 
 
 /**
@@ -195,7 +195,7 @@ router.get("/UserWomenlists", authMiddleware, UserWomenlist);
  *       401:
  *         description: Unauthorized
  */
-router.get("/UserListMenProducts", authMiddleware, UserListMenProduct);
+router.get("/UserListMenProducts", UserListMenProduct);
 
 
 /**
@@ -212,7 +212,7 @@ router.get("/UserListMenProducts", authMiddleware, UserListMenProduct);
  *       401:
  *         description: Unauthorized
  */
-router.get("/UserGetTopProducts", authMiddleware, UserGetTopProduct);
+router.get("/UserGetTopProducts", UserGetTopProduct);
 
 
 /**
@@ -229,7 +229,7 @@ router.get("/UserGetTopProducts", authMiddleware, UserGetTopProduct);
  *       401:
  *         description: Unauthorized
  */
-router.get("/UserListArrivalsProducts", authMiddleware, UserListArrivalsProduct);
+router.get("/UserListArrivalsProducts", UserListArrivalsProduct);
 
 export default router;
 
