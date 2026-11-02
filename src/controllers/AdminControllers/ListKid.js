@@ -31,7 +31,9 @@ let filter={};
 
 
 
- const fetchAllKid = await KidProduct.find().sort({_id:-1})
+    const fetchAllKid = await KidProduct.find(filter).sort({
+      _id: -1,
+    });
 
  return res.status(200).json({
        message: "Kid fetched successfully",
