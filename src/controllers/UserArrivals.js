@@ -3,7 +3,27 @@
 const UserListArrivalsProduct = async(req,res)=>{
     try
     {
- const UserGetArrivalsProdut = await ArrivalsProduct.find().sort({_id:-1})
+
+
+                   const { search } = req.query;
+
+    let filter = {};
+
+    if (search && search.trim()) {
+      const searchRegex = new RegExp(
+        search.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+        "i"
+      );
+
+      filter = {
+        $or: [
+          { name: searchRegex },
+          { brand: searchRegex },
+          { category: searchRegex },
+        ],
+      };
+    }
+ const UserGetArrivalsProdut = await ArrivalsProduct.find(filter).sort({_id:-1})
  return res.status(200).json({
         message: "User Arrivals Produts fetched successfully",
     
