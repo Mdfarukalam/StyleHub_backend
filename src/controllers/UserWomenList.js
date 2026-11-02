@@ -1,8 +1,8 @@
- import MenProduct from "../models/AdminModel/MenProduct.js";
+import WomenProduct from "../models/AdminModel/WomenProduct.js";
  
  const UserMenlist= async(req,res)=>{
     try{
- const GetUser_Men=await MenProduct.find().sort({_id:-1})
+ const GetUser_Men=await WomenProduct.find().sort({_id:-1})
 
   return res.status(200).json({
    message: "Men Product fetched successfully",
