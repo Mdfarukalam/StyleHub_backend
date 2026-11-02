@@ -20,6 +20,36 @@ const upload = multer({
   },
 });
 
-ImageUploadrouter.post("/upload", upload.single("image"), UploadImage);
+/**
+ * @swagger
+ * /api/admin/upload:
+ *   post:
+ *     summary: Upload product image
+ *     tags: 
+ *       - Image Upload
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       200:
+ *         description: Image uploaded successfully
+ *       400:
+ *         description: Please select an image
+ *       500:
+ *         description: Image upload failed
+ */
+
+ImageUploadrouter.post(
+  "/upload",
+  upload.single("image"),
+  UploadImage
+);
 
 export default ImageUploadrouter;

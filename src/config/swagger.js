@@ -30,7 +30,8 @@ const options = {
 
   apis: [
     path.join(process.cwd(), "src/routes/adminAuthRoutes.js"),
-    "./src/routes/authRoutes.js"
+    "./src/routes/authRoutes.js",
+    "./src/routes/uploadRoutes.js"
   ],
 };
 
