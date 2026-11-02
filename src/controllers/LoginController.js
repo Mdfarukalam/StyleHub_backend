@@ -21,12 +21,18 @@ const Login = async (req, res) => {
 
         }
 
-        const matchpassword = await bcrypt.compare(Password, RegisterUser.Password)
-        if (!matchpassword) {
+
+
+            const RegisterPassword = await User.findOne({ Password })
+        console.log(RegisterUser,"RegisterUser")
+        if (!RegisterPassword) {
             return res.status(400).json({
-                message: "Invalid password",
+               message: "Invalid password",
+
             })
+
         }
+  
     
         const token = jwt.sign(
             { id: RegisterUser._id },

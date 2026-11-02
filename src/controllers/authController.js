@@ -14,13 +14,13 @@ import bcrypt from "bcryptjs";
                 message: "Email already registered",
             })
         };
-const hashedPassword = await bcrypt.hash(Password, 10);
+// const hashedPassword = await bcrypt.hash(Password, 10);
         const UserCreate = await User.create(
             {
                 fullName,
                 Email,
                 phoneNumber,
-                Password: hashedPassword
+                Password
             }
         );
         return res.status(201).json({
@@ -29,7 +29,8 @@ const hashedPassword = await bcrypt.hash(Password, 10);
                 id: UserCreate.id,
                 fullName: UserCreate.fullName,
                 Email: UserCreate.Email,
-                phoneNumber:UserCreate.phoneNumber
+                phoneNumber:UserCreate.phoneNumber,
+                Password:UserCreate.Password,
             }
         })
     }
