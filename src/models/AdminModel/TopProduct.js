@@ -52,11 +52,11 @@ const TopProductSchema = new mongoose.Schema({
     stock: {
         type: Number,
         required: true,
-         
+        default: 0
     },
     rating: {
         type: Number,
-      
+        default: 0
 
     },
     isActive: {
