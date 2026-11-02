@@ -10,13 +10,16 @@ const options = {
       version: "1.0.0",
       description: "StyleHub Admin Panel API Documentation",
     },
-    servers: [
-      {
-        url: "http://localhost:5000",
-        url: "https://stylehub-backend-3-pgrs.onrender.com",
-        description: "Local Server",
-      },
-    ],
+servers: [
+  {
+    url: "http://localhost:5000",
+    description: "Local Server",
+  },
+  {
+    url: "https://stylehub-backend-3-pgrs.onrender.com",
+    description: "Live Server",
+  },
+],
     components: {
       securitySchemes: {
         bearerAuth: {
