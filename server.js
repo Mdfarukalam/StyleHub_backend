@@ -13,6 +13,12 @@ const startServer = async () => {
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
+
+
+    console.log(
+  "Cloudinary API Key Loaded:",
+  Boolean(process.env.CLOUDINARY_API_KEY)
+);
   } catch (error) {
     console.error("Failed to start server:", error.message);
     process.exit(1);

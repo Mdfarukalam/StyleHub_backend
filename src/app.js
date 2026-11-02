@@ -5,7 +5,7 @@ import router from "./routes/authRoutes.js";
 import Adminrouter from "./routes/adminAuthRoutes.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./config/swagger.js";
-
+import ImageUploadrouter from "./routes/uploadRoutes.js";
 const app = express();
 
 app.use(cors());
@@ -16,6 +16,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", router);
+app.use("/api/admin", ImageUploadrouter);
 app.use("/api/admin", Adminrouter);
 app.use(
   "/api-docs",
