@@ -16,9 +16,9 @@ try{
 
       filter = {
         $or: [
-          { name: searchRegex },
-          { brand: searchRegex },
-          { category: searchRegex },
+          { fullName: searchRegex },
+          { Email: searchRegex },
+          { phoneNumber: searchRegex },
         ],
       };
     }
