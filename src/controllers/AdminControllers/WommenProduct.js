@@ -1,8 +1,9 @@
+
 import WomenProduct from "../../models/AdminModel/WomenProduct.js";
-const AddWomenProduct = async(req,res)=>{
-   
-try{
-     const {
+
+const AddWomenProduct = async (req, res) => {
+  try {
+    const {
       name,
       brand,
       category,
@@ -10,45 +11,70 @@ try{
       originalPrice,
       discount,
       description,
-      images,
-      colors,
-      sizes,
+      colorVariants,
       stock,
       rating,
-      isActive
-    } = req.body; 
- if(!name || !brand || !category || price == null || originalPrice == null || discount == null|| !images|| colors.length === 0 || !sizes.length === 0 || !stock ||!rating){
-return res.status(400).json({ message: "All fields are required", })
+      isActive,
+    } = req.body;
 
- }
+    // Required fields validation
+    if (
+      !name ||
+      !brand ||
+      !category ||
+      price == null ||
+      originalPrice == null ||
+      discount == null ||
+      stock == null ||
+      rating == null ||
+      !Array.isArray(colorVariants) ||
+      colorVariants.length === 0
+    ) {
+      return res.status(400).json({
+        message: "All fields are required",
+      });
+    }
 
- 
-  const CreateWomenProduct= await WomenProduct.create({
-    name,
-    brand,
-    category,
-    price,
-    originalPrice,
-    discount,
-    images,
-    sizes,
-    stock,
-    rating,
-    isActive,
-    colors,
-    description
-  }) 
+    // Validate each color variant
+    const invalidVariant = colorVariants.some(
+      (variant) =>
+        !variant.color?.trim() ||
+        !variant.images ||
+        !Array.isArray(variant.sizes) ||
+        variant.sizes.length === 0
+    );
 
-     return res.status(201).json({
-            message: "Women Product created successfully",
-            WomenProduct: CreateWomenProduct
-        });
+    if (invalidVariant) {
+      return res.status(400).json({
+        message: "Every color must have an image and at least one size",
+      });
+    }
 
-}
-catch(error){
+    const CreateWomenProduct = await WomenProduct.create({
+      name,
+      brand,
+      category,
+      price,
+      originalPrice,
+      discount,
+      description,
+      colorVariants,
+      stock,
+      rating,
+      isActive,
+    });
+
+    return res.status(201).json({
+      message: "Women Product created successfully",
+      WomenProduct: CreateWomenProduct,
+    });
+  } catch (error) {
+    console.error("AddWomenProduct Error:", error);
+
     return res.status(500).json({
-            message: "Server error",
-        })
-}
-}
-export default AddWomenProduct
+      message: "Server error",
+    });
+  }
+};
+
+export default AddWomenProduct;
