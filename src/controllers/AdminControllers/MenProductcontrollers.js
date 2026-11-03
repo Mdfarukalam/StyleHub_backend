@@ -1,9 +1,9 @@
+
 import MenProduct from "../../models/AdminModel/MenProduct.js";
 
-const AddMenProduct = async(req,res)=>{
-   
-try{
-      const {
+const AddMenProduct = async (req, res) => {
+  try {
+    const {
       name,
       brand,
       category,
@@ -19,7 +19,7 @@ try{
       !name ||
       !brand ||
       !category ||
-     stock == null ||
+      stock == null ||
       rating == null ||
       !Array.isArray(colorVariants) ||
       colorVariants.length === 0
@@ -29,48 +29,61 @@ try{
       });
     }
 
-    // Validate each color variant
-    const invalidVariant = colorVariants.some(
-      (variant) =>
+    // Validate color variants
+    const invalidVariant = colorVariants.some((variant) => {
+      const price = Number(variant.price);
+      const originalPrice = Number(variant.originalPrice);
+      const discount = Number(variant.discount);
+
+      return (
         !variant.color?.trim() ||
-            !variant.price ||
-              !variant.originalPrice||
-                !variant.discount ||
         !variant.images ||
         !Array.isArray(variant.sizes) ||
-        variant.sizes.length === 0
-    );
+        variant.sizes.length === 0 ||
+        variant.price === "" ||
+        variant.originalPrice === "" ||
+        !Number.isFinite(price) ||
+        !Number.isFinite(originalPrice) ||
+        !Number.isFinite(discount) ||
+        price < 0 ||
+        originalPrice <= 0 ||
+        price > originalPrice ||
+        discount < 0 ||
+        discount > 100
+      );
+    });
 
     if (invalidVariant) {
       return res.status(400).json({
-        message: "Every color must have an image and price and originalPrice and  discount at least one size",
+        message: "Please provide valid color, image, sizes and price details",
       });
     }
 
+    // Create product
+    const CreateMenProduct = await MenProduct.create({
+      name,
+      brand,
+      category,
+      description,
+      colorVariants,
+      stock,
+      rating,
+      isActive,
+    });
 
- 
-  const CreateMenProduct= await MenProduct.create({
-    name,
-    brand,
-    category,
-    stock,
-    rating,
-    isActive,
-    colors,
-    description,
-    colorVariants
-  }) 
+    return res.status(201).json({
+      message: "Product created successfully",
+      MenProduct: CreateMenProduct,
+    });
 
-     return res.status(201).json({
-            message: "Product created successfully",
-            MenProduct: CreateMenProduct
-        });
+  } catch (error) {
+    console.error("Add Men Product Error:", error);
 
-}
-catch(error){
     return res.status(500).json({
-            message: "Server error",
-        })
-}
-}
-export default AddMenProduct
+      message: "Server error",
+      error: error.message,
+    });
+  }
+};
+
+export default AddMenProduct;
