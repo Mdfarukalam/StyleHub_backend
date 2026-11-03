@@ -18,20 +18,7 @@ const WomenProductSchema = new mongoose.Schema({
 
     },
 
-
-    price: {
-        type: Number,
-        required: true,
-    },
-    originalPrice: {
-        type: Number,
-        required: true,
-    },
-
-    discount: {
-        type: Number,
-        required: true,
-    },
+ 
     description: {
         type: String,
 
@@ -52,6 +39,22 @@ const WomenProductSchema = new mongoose.Schema({
       type: [String],
       required: true,
     },
+
+
+    price: {
+        type: Number,
+        required: true,
+    },
+    originalPrice: {
+        type: Number,
+        required: true,
+    },
+
+    discount: {
+        type: Number,
+        required: true,
+    },
+
   },
 ],
  

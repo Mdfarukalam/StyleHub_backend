@@ -19,19 +19,7 @@ const KidProductSchema = new mongoose.Schema({
     },
 
 
-    price: {
-        type: Number,
-        required: true,
-    },
-    originalPrice: {
-        type: Number,
-        required: true,
-    },
-
-    discount: {
-        type: Number,
-        required: true,
-    },
+ 
     description: {
         type: String,
 
@@ -51,6 +39,21 @@ colorVariants: [
     sizes: {
       type: [String],
       required: true,
+    },
+
+
+        price: {
+        type: Number,
+        required: true,
+    },
+    originalPrice: {
+        type: Number,
+        required: true,
+    },
+
+    discount: {
+        type: Number,
+        required: true,
     },
   },
 ],

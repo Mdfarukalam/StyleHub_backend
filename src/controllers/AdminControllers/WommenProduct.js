@@ -7,9 +7,6 @@ const AddWomenProduct = async (req, res) => {
       name,
       brand,
       category,
-      price,
-      originalPrice,
-      discount,
       description,
       colorVariants,
       stock,
@@ -22,10 +19,7 @@ const AddWomenProduct = async (req, res) => {
       !name ||
       !brand ||
       !category ||
-      price == null ||
-      originalPrice == null ||
-      discount == null ||
-      stock == null ||
+     stock == null ||
       rating == null ||
       !Array.isArray(colorVariants) ||
       colorVariants.length === 0
@@ -39,6 +33,9 @@ const AddWomenProduct = async (req, res) => {
     const invalidVariant = colorVariants.some(
       (variant) =>
         !variant.color?.trim() ||
+            !variant.price ||
+              !variant.originalPrice||
+                !variant.discount ||
         !variant.images ||
         !Array.isArray(variant.sizes) ||
         variant.sizes.length === 0
@@ -46,7 +43,7 @@ const AddWomenProduct = async (req, res) => {
 
     if (invalidVariant) {
       return res.status(400).json({
-        message: "Every color must have an image and at least one size",
+        message: "Every color must have an image and price and originalPrice and  discount at least one size",
       });
     }
 
@@ -54,9 +51,6 @@ const AddWomenProduct = async (req, res) => {
       name,
       brand,
       category,
-      price,
-      originalPrice,
-      discount,
       description,
       colorVariants,
       stock,
