@@ -14,6 +14,7 @@ const AddCart = async (req, res) => {
       originalPrice,
       price,
       sizes,
+      quantity
     } = req.body;
 
     // Required fields validation
@@ -24,6 +25,7 @@ const AddCart = async (req, res) => {
       !productType ||
       !color ||
       discount == null ||
+      quantity == null ||
       !images ||
       originalPrice == null ||
       price == null ||
@@ -40,6 +42,7 @@ const AddCart = async (req, res) => {
       userId: req.user.id,
       productId,
       productType: "men",
+      quantity:1,
       color,
       discount,
       images,
