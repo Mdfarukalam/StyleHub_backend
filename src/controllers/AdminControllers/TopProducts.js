@@ -55,8 +55,8 @@ try{
      stock,
     rating,
     isActive,
-    colors,
-    description
+    description,
+    colorVariants
   }) 
 
      return res.status(201).json({

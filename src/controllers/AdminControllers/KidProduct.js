@@ -55,7 +55,7 @@ try{
     stock,
     rating,
     isActive,
-    colors,
+  colorVariants,
     description
   }) 
 

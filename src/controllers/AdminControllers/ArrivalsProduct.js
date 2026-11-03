@@ -52,11 +52,10 @@ try{
     name,
     brand,
     category,
-  
     stock,
     rating,
     isActive,
-    colors,
+colorVariants,
     description
   }) 
 
