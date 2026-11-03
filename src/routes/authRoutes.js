@@ -1,28 +1,4 @@
-
-// import express from "express";
-// import signup from "../controllers/authController.js";
-// import Login from "../controllers/LoginController.js";
-// import authMiddleware from "../middleware/authMiddleware.js";
-// import Profile from "../controllers/ProfileController.js";
-// import Userkidlist from "../controllers/UserkidList.js";
-// import UserWomenlist from "../controllers/UserWomenList.js";
-// import UserListMenProduct from "../controllers/UserMen.js";
-// import UserGetTopProduct from "../controllers/UserTopProduct.js";
-// import UserListArrivalsProduct from "../controllers/UserArrivals.js";
-// const router = express.Router();
-
-// router.post("/signup", signup);
-// router.post("/Login", Login);
-// router.get("/Profile", authMiddleware,Profile);
-// router.get("/Userkidlists", authMiddleware,Userkidlist);
-// router.get("/UserWomenlists", authMiddleware,UserWomenlist);
-// router.get("/UserListMenProducts", authMiddleware,UserListMenProduct);
-// router.get("/UserGetTopProducts", authMiddleware,UserGetTopProduct);
-// router.get("/UserListArrivalsProducts", authMiddleware,UserListArrivalsProduct);
-
-
-
-// export default router;
+ 
 
 
 
@@ -42,6 +18,7 @@ import UserWomenlist from "../controllers/UserWomenList.js";
 import UserListMenProduct from "../controllers/UserMen.js";
 import UserGetTopProduct from "../controllers/UserTopProduct.js";
 import UserListArrivalsProduct from "../controllers/UserArrivals.js";
+import AddCart from "../controllers/AdminControllers/CartCantroller.js";
 
 const router = express.Router();
 
@@ -230,6 +207,73 @@ router.get("/UserGetTopProducts", UserGetTopProduct);
  *         description: Unauthorized
  */
 router.get("/UserListArrivalsProducts", UserListArrivalsProduct);
+
+
+
+
+
+/**
+ * @swagger
+ * /api/cart/add:
+ *   post:
+ *     summary: Add product to cart
+ *     tags: [Cart]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - productId
+ *               - productType
+ *               - color
+ *               - discount
+ *               - images
+ *               - originalPrice
+ *               - price
+ *               - sizes
+ *             properties:
+ *               productId:
+ *                 type: string
+ *                 example: "690a12345678901234567890"
+ *               productType:
+ *                 type: string
+ *                 enum: [men, women, kids, arrivals, topProducts]
+ *                 example: men
+ *               color:
+ *                 type: string
+ *                 example: blue
+ *               discount:
+ *                 type: number
+ *                 example: 92
+ *               images:
+ *                 type: string
+ *                 example: "https://res.cloudinary.com/example/image.webp"
+ *               originalPrice:
+ *                 type: number
+ *                 example: 10000
+ *               price:
+ *                 type: number
+ *                 example: 789
+ *               sizes:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 example: ["XL"]
+ *     responses:
+ *       201:
+ *         description: Cart saved successfully
+ *       400:
+ *         description: All fields are required
+ *       401:
+ *         description: Unauthorized
+ *       500:
+ *         description: Server error
+ */
+router.post("/AddCarts", authMiddleware, AddCart);
 
 export default router;
 
