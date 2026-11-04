@@ -4,8 +4,8 @@ import Cart from "../../models/Cart.js";
 const AddCart = async (req, res) => {
   try {
     const {
-        name,
-        brand,
+      name,
+      brand,
       productId,
       productType,
       color,
@@ -14,13 +14,13 @@ const AddCart = async (req, res) => {
       originalPrice,
       price,
       sizes,
-      quantity
+      quantity,
     } = req.body;
 
     // Required fields validation
     if (
-           !name||
-        brand ||
+      !name ||
+      !brand ||
       !productId ||
       !productType ||
       !color ||
@@ -37,12 +37,17 @@ const AddCart = async (req, res) => {
       });
     }
 
-    // Save Cart
+    if (quantity < 1 || price < 0 || originalPrice <= 0) {
+      return res.status(400).json({
+        message: "Invalid quantity or price",
+      });
+    }
+
     const CreateCartProduct = await Cart.create({
       userId: req.user.id,
       productId,
-      productType: "men",
-      quantity:1,
+   productType: "men",
+  quantity: 1,
       color,
       discount,
       images,
@@ -50,7 +55,7 @@ const AddCart = async (req, res) => {
       price,
       sizes,
       name,
-      brand
+      brand,
     });
 
     return res.status(201).json({
