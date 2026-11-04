@@ -291,7 +291,7 @@ router.get("/UserCartProducts", authMiddleware, UserCartProduct);
 
 /**
  * @swagger
- * /api/auth/DeleteCartProduct/{id}:
+ * /api/auth/DeleteCartProducts:
  *   delete:
  *     summary: Delete a product from logged-in user's cart
  *     tags: [Cart]
