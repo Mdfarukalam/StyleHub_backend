@@ -1,13 +1,13 @@
-import Cart from "../models/Cart";
+import Cart from "../models/Cart.js";
 
-const UserCartProduct = async(req,res)=>{
-    try
-    {
+const UserCartProduct = async (req, res) => {
+  try {
+    const { search } = req.query;
 
-
-                   const { search } = req.query;
-
-    let filter = {};
+    // Only logged-in user's cart
+    let filter = {
+      userId: req.user.id,
+    };
 
     if (search && search.trim()) {
       const searchRegex = new RegExp(
@@ -15,25 +15,30 @@ const UserCartProduct = async(req,res)=>{
         "i"
       );
 
-      filter = {
-        $or: [
-          { name: searchRegex },
-          { brand: searchRegex },
-          { category: searchRegex },
-        ],
-      };
+      filter.$or = [
+        { name: searchRegex },
+        { brand: searchRegex },
+        { color: searchRegex },
+      ];
     }
- const UserGetCartProdut = await Cart.find(filter).sort({_id:-1})
- return res.status(200).json({
-        message: "Cart Produts fetched successfully",
-    
-      CartProdut:UserGetCartProdut
- })
-    }
-    catch(error){
-    return res.status(500).json({
-      message: "Server error"
+
+    const UserGetCartProdut = await Cart.find(filter).sort({
+      _id: -1,
     });
-    }
-}
-export default UserCartProduct
+
+    return res.status(200).json({
+      message: "Cart Products fetched successfully",
+      CartProdut: UserGetCartProdut,
+    });
+
+  } catch (error) {
+    console.error("User Cart Error:", error);
+
+    return res.status(500).json({
+      message: "Server error",
+      error: error.message,
+    });
+  }
+};
+
+export default UserCartProduct;
