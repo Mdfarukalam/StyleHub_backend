@@ -322,7 +322,12 @@ router.delete("/DeleteCartProducts", authMiddleware, DeleteCartProductfunction);
 
 
 
-
+/**
+ * @swagger
+ * tags:
+ *   name: Wishlist
+ *   description: Customer Wishlist APIs
+ */
  
 
 /**
