@@ -20,6 +20,7 @@ import UserGetTopProduct from "../controllers/UserTopProduct.js";
 import UserListArrivalsProduct from "../controllers/UserArrivals.js";
 import AddCart from "../controllers/CartCantroller.js";
 import UserCartProduct from "../controllers/CartList.js";
+import DeleteCartProductfunction from "../controllers/DeleteList.js";
 
 const router = express.Router();
 
@@ -287,6 +288,33 @@ router.post("/AddCarts", authMiddleware, AddCart);
  */
 router.get("/UserCartProducts", authMiddleware, UserCartProduct);
 
+
+/**
+ * @swagger
+ * /api/auth/DeleteCartProduct/{id}:
+ *   delete:
+ *     summary: Delete a product from logged-in user's cart
+ *     tags: [Cart]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Cart product ID
+ *     responses:
+ *       200:
+ *         description: Cart product deleted successfully
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: Cart product not found
+ *       500:
+ *         description: Server error
+ */
+router.delete("/DeleteCartProducts", authMiddleware, DeleteCartProductfunction);
  
 
 export default router;
