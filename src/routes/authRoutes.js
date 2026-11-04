@@ -332,7 +332,7 @@ router.delete("/DeleteCartProducts", authMiddleware, DeleteCartProductfunction);
 
 /**
  * @swagger
- * /api/wishlist/AddWishlist:
+ * /api/auth/AddWishlist:
  *   post:
  *     summary: Add product to wishlist
  *     tags: [Wishlist]
@@ -367,7 +367,7 @@ router.post("/AddWishlist", authMiddleware, AddWishlist);
 
 /**
  * @swagger
- * /api/wishlist/GetWishlist:
+ * /api/auth/GetWishlist:
  *   get:
  *     summary: Get customer wishlist
  *     tags: [Wishlist]
@@ -383,7 +383,7 @@ router.get("/GetWishlist", authMiddleware, GetWishlist);
 
 /**
  * @swagger
- * /api/wishlist/RemoveWishlist:
+ * /api/auth/RemoveWishlist:
  *   delete:
  *     summary: Remove product from wishlist
  *     tags: [Wishlist]
