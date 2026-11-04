@@ -21,6 +21,9 @@ import UserListArrivalsProduct from "../controllers/UserArrivals.js";
 import AddCart from "../controllers/CartCantroller.js";
 import UserCartProduct from "../controllers/CartList.js";
 import DeleteCartProductfunction from "../controllers/DeleteList.js";
+import { AddWishlist } from "../controllers/WishlistController.js";
+import { GetWishlist } from "../controllers/WishlistController.js";
+import { RemoveWishlist } from "../controllers/WishlistController.js";
 
 const router = express.Router();
 
@@ -315,7 +318,99 @@ router.get("/UserCartProducts", authMiddleware, UserCartProduct);
  *         description: Server error
  */
 router.delete("/DeleteCartProducts", authMiddleware, DeleteCartProductfunction);
+
+
+
+
+
  
+
+/**
+ * @swagger
+ * /api/wishlist/AddWishlist:
+ *   post:
+ *     summary: Add product to wishlist
+ *     tags: [Wishlist]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - productId
+ *               - productType
+ *             properties:
+ *               productId:
+ *                 type: string
+ *                 example: "672a12345678901234567890"
+ *               productType:
+ *                 type: string
+ *                 enum: [men, women, kids, top-product, new-arrivals]
+ *                 example: men
+ *     responses:
+ *       201:
+ *         description: Product added to wishlist
+ *       400:
+ *         description: Product already in wishlist
+ *       401:
+ *         description: Unauthorized
+ */
+router.post("/AddWishlist", authMiddleware, AddWishlist);
+
+/**
+ * @swagger
+ * /api/wishlist/GetWishlist:
+ *   get:
+ *     summary: Get customer wishlist
+ *     tags: [Wishlist]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Wishlist fetched successfully
+ *       401:
+ *         description: Unauthorized
+ */
+router.get("/GetWishlist", authMiddleware, GetWishlist);
+
+/**
+ * @swagger
+ * /api/wishlist/RemoveWishlist:
+ *   delete:
+ *     summary: Remove product from wishlist
+ *     tags: [Wishlist]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - productId
+ *               - productType
+ *             properties:
+ *               productId:
+ *                 type: string
+ *                 example: "672a12345678901234567890"
+ *               productType:
+ *                 type: string
+ *                 enum: [men, women, kids, top-product, new-arrivals]
+ *                 example: men
+ *     responses:
+ *       200:
+ *         description: Product removed from wishlist
+ *       404:
+ *         description: Product not found in wishlist
+ *       401:
+ *         description: Unauthorized
+ */
+ 
+router.delete("/RemoveWishlist", authMiddleware, RemoveWishlist);
 
 export default router;
 
