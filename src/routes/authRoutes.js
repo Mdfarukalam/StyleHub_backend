@@ -273,17 +273,19 @@ router.post("/AddCarts", authMiddleware, AddCart);
  * @swagger
  * /api/auth/UserCartProducts:
  *   get:
- *     summary: Get New Cart
- *     tags: [User Products]
+ *     summary: Get all cart products of logged-in user
+ *     tags: [Cart]
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: New Cart fetched successfully
+ *         description: User cart products fetched successfully
  *       401:
  *         description: Unauthorized
+ *       500:
+ *         description: Server error
  */
-router.get("/UserCartProducts", UserCartProduct);
+router.get("/UserCartProducts", authMiddleware, UserCartProduct);
 
  
 
