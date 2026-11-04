@@ -238,31 +238,23 @@ router.get("/UserListArrivalsProducts", UserListArrivalsProduct);
  *             properties:
  *               productId:
  *                 type: string
- *                 example: "690a12345678901234567890"
  *               productType:
  *                 type: string
  *                 enum: [men, women, kids, arrivals, topProducts]
- *                 example: men
  *               color:
  *                 type: string
- *                 example: blue
  *               discount:
  *                 type: number
- *                 example: 92
  *               images:
  *                 type: string
- *                 example: "https://res.cloudinary.com/example/image.webp"
  *               originalPrice:
  *                 type: number
- *                 example: 10000
  *               price:
  *                 type: number
- *                 example: 789
  *               sizes:
  *                 type: array
  *                 items:
  *                   type: string
- *                 example: ["XL"]
  *     responses:
  *       201:
  *         description: Cart saved successfully
