@@ -214,7 +214,7 @@ router.get("/UserListArrivalsProducts", UserListArrivalsProduct);
 
 /**
  * @swagger
- * /api/cart/add:
+ * /api/auth/AddCarts:
  *   post:
  *     summary: Add product to cart
  *     tags: [Cart]
