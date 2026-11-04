@@ -18,7 +18,8 @@ import UserWomenlist from "../controllers/UserWomenList.js";
 import UserListMenProduct from "../controllers/UserMen.js";
 import UserGetTopProduct from "../controllers/UserTopProduct.js";
 import UserListArrivalsProduct from "../controllers/UserArrivals.js";
-import AddCart from "../controllers/AdminControllers/CartCantroller.js";
+import AddCart from "../controllers/CartCantroller.js";
+import UserCartProduct from "../controllers/CartList.js";
 
 const router = express.Router();
 
@@ -266,6 +267,25 @@ router.get("/UserListArrivalsProducts", UserListArrivalsProduct);
  *         description: Server error
  */
 router.post("/AddCarts", authMiddleware, AddCart);
+
+
+/**
+ * @swagger
+ * /api/auth/UserListArrivalsProducts:
+ *   get:
+ *     summary: Get New Cart
+ *     tags: [User Products]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: New Cart fetched successfully
+ *       401:
+ *         description: Unauthorized
+ */
+router.get("/UserCartProducts", UserCartProduct);
+
+ 
 
 export default router;
 
