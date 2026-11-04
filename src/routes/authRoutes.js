@@ -271,7 +271,7 @@ router.post("/AddCarts", authMiddleware, AddCart);
 
 /**
  * @swagger
- * /api/auth/UserListArrivalsProducts:
+ * /api/auth/UserCartProducts:
  *   get:
  *     summary: Get New Cart
  *     tags: [User Products]
