@@ -1,9 +1,9 @@
+
 import Wishlist_product from "../models/Wishlist.js";
 
- 
-  const RemoveWishlist = async (req, res) => {
+const RemoveWishlist = async (req, res) => {
   try {
-    const { productId, productType } = req.body;
+    const { productId, productType } = req.query;
     const userId = req.user.id;
 
     const wishlist = await Wishlist_product.findOneAndDelete({
@@ -23,6 +23,7 @@ import Wishlist_product from "../models/Wishlist.js";
       success: true,
       message: "Product removed from wishlist",
     });
+
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -31,5 +32,4 @@ import Wishlist_product from "../models/Wishlist.js";
   }
 };
 
-
-export default RemoveWishlist
+export default RemoveWishlist;
