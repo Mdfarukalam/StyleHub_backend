@@ -1,20 +1,57 @@
- 
- 
+
 import Wishlist_product from "../models/Wishlist.js";
 
-  const GetWishlist = async (req, res) => {
+import MenProduct from "../models/AdminModel/MenProduct.js";
+import WomenProduct from "../models/AdminModel/WomenProduct.js";
+import KidsProduct from "../models/AdminModel/KidsProduct.js";
+
+const GetWishlist = async (req, res) => {
   try {
     const userId = req.user.id;
 
-    const wishlist = await Wishlist_product.find({ userId }).sort({
-      _id: -1,
-    });
+    // Get user's wishlist
+    const wishlist = await Wishlist_product.find({
+      userId,
+    }).sort({ _id: -1 }).lean();
+
+    // Product model mapping
+    const productModels = {
+      men: MenProduct,
+      women: WomenProduct,
+      kids: KidsProduct,
+    };
+
+    // Fetch complete product details
+    const wishlistProducts = await Promise.all(
+      wishlist.map(async (item) => {
+        const ProductModel = productModels[
+          item.productType.toLowerCase()
+        ];
+
+        if (!ProductModel) {
+          return {
+            ...item,
+            productDetails: null,
+          };
+        }
+
+        const productDetails = await ProductModel.findById(
+          item.productId
+        ).lean();
+
+        return {
+          ...item,
+          productDetails,
+        };
+      })
+    );
 
     return res.status(200).json({
       success: true,
       message: "Wishlist fetched successfully",
-      wishlist,
+      wishlist: wishlistProducts,
     });
+
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -23,6 +60,4 @@ import Wishlist_product from "../models/Wishlist.js";
   }
 };
 
-
-
-export default GetWishlist
+export default GetWishlist;
