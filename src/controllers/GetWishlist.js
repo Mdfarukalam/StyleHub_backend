@@ -9,33 +9,31 @@ const GetWishlist = async (req, res) => {
   try {
     const userId = req.user.id;
 
-    // Get wishlist
+    // Get wishlist data
     const wishlist = await Wishlist_product.find({
       userId,
-    })
-      .sort({ _id: -1 })
-      .lean();
+    }).sort({ _id: -1 }).lean();
 
-    // Search product using productId
+    // Match productId with all 3 collections
     const wishlistProducts = await Promise.all(
       wishlist.map(async (item) => {
 
         const productId = item.productId;
 
-        // Search in all product collections
-        let productDetails = await MenProduct.findById(productId).lean();
+        const [menProduct, kidProduct, womenProduct] =
+          await Promise.all([
+            MenProduct.findById(productId).lean(),
+            KidProduct.findById(productId).lean(),
+            WomenProduct.findById(productId).lean(),
+          ]);
 
-        if (!productDetails) {
-          productDetails = await WomenProduct.findById(productId).lean();
-        }
-
-        if (!productDetails) {
-          productDetails = await KidProduct.findById(productId).lean();
-        }
+        // Get matched product
+        const productDetails =
+          menProduct || kidProduct || womenProduct || null;
 
         return {
           ...item,
-          productDetails: productDetails || null,
+          productDetails,
         };
       })
     );
