@@ -30,7 +30,7 @@ const AddWishlist = async (req, res) => {
     }
 
     // Add product to wishlist
-    const wishlist = await Wishlist.create({
+    const wishlist = await Wishlist_product.create({
       userId,
       productId,
       productType,
