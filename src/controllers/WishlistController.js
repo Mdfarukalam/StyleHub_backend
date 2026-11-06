@@ -1,6 +1,5 @@
- import Wishlist_product from "../models/Wishlist.js";
- 
- 
+
+import Wishlist_product from "../models/Wishlist.js";
 
 const AddWishlist = async (req, res) => {
   try {
@@ -16,7 +15,7 @@ const AddWishlist = async (req, res) => {
     }
 
     // Check existing wishlist
-    const existingProduct = await  Wishlist_product.findOne({
+    const existingProduct = await Wishlist_product.findOne({
       userId,
       productId,
       productType,
