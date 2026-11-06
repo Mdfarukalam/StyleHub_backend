@@ -12,32 +12,26 @@ const GetWishlist = async (req, res) => {
     // Get wishlist
     const wishlist = await Wishlist_product.find({
       userId,
-    }).sort({ _id: -1 }).lean();
+    })
+      .sort({ _id: -1 })
+      .lean();
 
-    // Product model mapping
-    const productModels = {
-      men: MenProduct,
-      women: WomenProduct,
-      kids: KidProduct,
-    };
-
-    // Get complete product details
+    // Search product using productId
     const wishlistProducts = await Promise.all(
       wishlist.map(async (item) => {
 
-        const ProductModel =
-          productModels[item.productType?.toLowerCase()];
+        const productId = item.productId;
 
-        if (!ProductModel) {
-          return {
-            ...item,
-            productDetails: null,
-          };
+        // Search in all product collections
+        let productDetails = await MenProduct.findById(productId).lean();
+
+        if (!productDetails) {
+          productDetails = await WomenProduct.findById(productId).lean();
         }
 
-        const productDetails = await ProductModel.findById(
-          item.productId
-        ).lean();
+        if (!productDetails) {
+          productDetails = await KidProduct.findById(productId).lean();
+        }
 
         return {
           ...item,
