@@ -1,12 +1,12 @@
  
-import Wishlist from "../models/Wishlist.js";
+ 
+import Wishlist_product from "../models/Wishlist.js";
 
-
-export const GetWishlist = async (req, res) => {
+  const GetWishlist = async (req, res) => {
   try {
     const userId = req.user.id;
 
-    const wishlist = await Wishlist.find({ userId }).sort({
+    const wishlist = await Wishlist_product.find({ userId }).sort({
       _id: -1,
     });
 
@@ -22,3 +22,7 @@ export const GetWishlist = async (req, res) => {
     });
   }
 };
+
+
+
+export default GetWishlist

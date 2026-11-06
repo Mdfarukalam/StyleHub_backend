@@ -22,12 +22,12 @@ const WishlistSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Same product cannot be added twice by the same user
-WishlistSchema.index(
-  { userId: 1, productId: 1, productType: 1 },
-  { unique: true }
-);
+// // Same product cannot be added twice by the same user
+// WishlistSchema.index(
+//   { userId: 1, productId: 1, productType: 1 },
+//   { unique: true }
+// );
 
-const Wishlist = mongoose.model("Wishlist", WishlistSchema);
+const Wishlist_product = mongoose.model("Wishlist", WishlistSchema);
 
-export default Wishlist;
+export default Wishlist_product;

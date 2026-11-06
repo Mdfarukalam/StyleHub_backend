@@ -1,12 +1,12 @@
-import Wishlist from "../models/Wishlist.js";
+import Wishlist_product from "../models/Wishlist.js";
 
  
-export const RemoveWishlist = async (req, res) => {
+  const RemoveWishlist = async (req, res) => {
   try {
     const { productId, productType } = req.body;
     const userId = req.user.id;
 
-    const wishlist = await Wishlist.findOneAndDelete({
+    const wishlist = await Wishlist_product.findOneAndDelete({
       userId,
       productId,
       productType,
@@ -30,3 +30,6 @@ export const RemoveWishlist = async (req, res) => {
     });
   }
 };
+
+
+export default RemoveWishlist

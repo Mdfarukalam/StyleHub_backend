@@ -1,12 +1,22 @@
-import Wishlist from "../models/Wishlist.js";
-
+ import Wishlist_product from "../models/Wishlist.js";
  
-export const AddWishlist = async (req, res) => {
+ 
+
+const AddWishlist = async (req, res) => {
   try {
     const { productId, productType } = req.body;
     const userId = req.user.id;
 
-    const existingProduct = await Wishlist.findOne({
+    // Validate required fields
+    if (!productId || !productType) {
+      return res.status(400).json({
+        success: false,
+        message: "Product ID and Product Type are required",
+      });
+    }
+
+    // Check existing wishlist
+    const existingProduct = await  Wishlist_product.findOne({
       userId,
       productId,
       productType,
@@ -19,6 +29,7 @@ export const AddWishlist = async (req, res) => {
       });
     }
 
+    // Add product to wishlist
     const wishlist = await Wishlist.create({
       userId,
       productId,
@@ -27,9 +38,10 @@ export const AddWishlist = async (req, res) => {
 
     return res.status(201).json({
       success: true,
-      message: "Product added to wishlist",
+      message: "Product added to wishlist successfully",
       wishlist,
     });
+
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -38,6 +50,4 @@ export const AddWishlist = async (req, res) => {
   }
 };
 
-
- 
- 
+export default AddWishlist;

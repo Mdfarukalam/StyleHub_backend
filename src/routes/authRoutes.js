@@ -21,9 +21,9 @@ import UserListArrivalsProduct from "../controllers/UserArrivals.js";
 import AddCart from "../controllers/CartCantroller.js";
 import UserCartProduct from "../controllers/CartList.js";
 import DeleteCartProductfunction from "../controllers/DeleteList.js";
-import { AddWishlist } from "../controllers/WishlistController.js";
-import { GetWishlist } from "../controllers/GetWishlist.js";
-import { RemoveWishlist } from "../controllers/DeleteWishlist.js";
+ import AddWishlist from "../controllers/WishlistController.js";
+ import GetWishlist from "../controllers/GetWishlist.js";
+ import RemoveWishlist from "../controllers/DeleteWishlist.js";
 
 const router = express.Router();
 
@@ -320,8 +320,6 @@ router.get("/UserCartProducts", authMiddleware, UserCartProduct);
 router.delete("/DeleteCartProducts", authMiddleware, DeleteCartProductfunction);
 
 
-
-
 /**
  * @swagger
  * tags:
@@ -417,5 +415,7 @@ router.get("/GetWishlist", authMiddleware, GetWishlist);
  
 router.delete("/RemoveWishlist", authMiddleware, RemoveWishlist);
 
+
+ 
 export default router;
 
