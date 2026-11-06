@@ -18,7 +18,7 @@ const GetWishlist = async (req, res) => {
     const productModels = {
       men: MenProduct,
       women: WomenProduct,
-      kids: KidsProduct,
+      kids: KidProduct,
     };
 
     // Get complete product details
