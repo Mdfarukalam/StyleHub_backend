@@ -3,13 +3,13 @@ import Wishlist_product from "../models/Wishlist.js";
 
 import MenProduct from "../models/AdminModel/MenProduct.js";
 import WomenProduct from "../models/AdminModel/WomenProduct.js";
-import KidsProduct from "../models/AdminModel/KidsProduct.js";
+import KidProduct from "../models/AdminModel/KidProduct.js";
 
 const GetWishlist = async (req, res) => {
   try {
     const userId = req.user.id;
 
-    // Get user's wishlist
+    // Get wishlist
     const wishlist = await Wishlist_product.find({
       userId,
     }).sort({ _id: -1 }).lean();
@@ -21,12 +21,12 @@ const GetWishlist = async (req, res) => {
       kids: KidsProduct,
     };
 
-    // Fetch complete product details
+    // Get complete product details
     const wishlistProducts = await Promise.all(
       wishlist.map(async (item) => {
-        const ProductModel = productModels[
-          item.productType.toLowerCase()
-        ];
+
+        const ProductModel =
+          productModels[item.productType?.toLowerCase()];
 
         if (!ProductModel) {
           return {
@@ -41,7 +41,7 @@ const GetWishlist = async (req, res) => {
 
         return {
           ...item,
-          productDetails,
+          productDetails: productDetails || null,
         };
       })
     );
