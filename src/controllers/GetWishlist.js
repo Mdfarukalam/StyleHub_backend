@@ -2,8 +2,8 @@
 import Wishlist_product from "../models/Wishlist.js";
 
 import MenProduct from "../models/AdminModel/MenProduct.js";
-import WomenProduct from "../models/AdminModel/WomenProduct.js";
 import KidProduct from "../models/AdminModel/KidProduct.js";
+import WomenProduct from "../models/AdminModel/WomenProduct.js";
 
 const GetWishlist = async (req, res) => {
   try {
