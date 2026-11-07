@@ -4,7 +4,7 @@ const AddTopProduct = async(req,res)=>{
    
 try{
    const {
-      name,
+ 
       brand,
       category,
       description,
@@ -16,7 +16,7 @@ try{
 
     // Required fields validation
     if (
-      !name ||
+ 
       !brand ||
       !category ||
      stock == null ||
@@ -49,7 +49,7 @@ try{
 
  
   const CreateMenProduct= await TopProduct.create({
-    name,
+ 
     brand,
     category,
      stock,

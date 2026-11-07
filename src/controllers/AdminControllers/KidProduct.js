@@ -3,7 +3,7 @@ const AddkidProduct = async(req,res)=>{
    
 try{
     const {
-      name,
+ 
       brand,
       category,
       description,
@@ -15,7 +15,7 @@ try{
 
     // Required fields validation
     if (
-      !name ||
+ 
       !brand ||
       !category ||
      stock == null ||
@@ -49,7 +49,7 @@ try{
 
  
   const CreateWomenProduct= await KidProduct.create({
-    name,
+ 
     brand,
     category,
     stock,

@@ -4,7 +4,7 @@ import WomenProduct from "../../models/AdminModel/WomenProduct.js";
 const AddWomenProduct = async (req, res) => {
   try {
     const {
-      name,
+ 
       brand,
       category,
       description,
@@ -16,7 +16,7 @@ const AddWomenProduct = async (req, res) => {
 
     // Required fields validation
     if (
-      !name ||
+ 
       !brand ||
       !category ||
      stock == null ||
@@ -48,7 +48,7 @@ const AddWomenProduct = async (req, res) => {
     }
 
     const CreateWomenProduct = await WomenProduct.create({
-      name,
+   
       brand,
       category,
       description,
