@@ -1,7 +1,7 @@
 import ContactUs from "../models/ContactUs"
  
 
- const signup = async (Req, res) => {
+ const ContactUsUser = async (Req, res) => {
     try {
         const { name, email, subject,message } = Req.body
         if (!name || !email || !subject || !message) {
@@ -34,5 +34,5 @@ import ContactUs from "../models/ContactUs"
         )
     }
 }
-export default signup
+export default ContactUsUser
  

@@ -38,6 +38,9 @@ import DeleteArrivalsProduct from "../controllers/AdminControllers/DeleteArrival
 
 import DeletedUser from "../controllers/AdminControllers/DeleteUser.js";
 
+
+import ContactUsList from "../controllers/AdminControllers/ContactUsUserList.js";
+
 const Adminrouter = express.Router();
 
 /**
@@ -569,6 +572,23 @@ Adminrouter.put("/EditArrivalsProducts", adminMiddleware, EditArrivalsProduct);
  *         description: New arrivals fetched successfully
  */
 Adminrouter.get("/ListArrivalsProducts", adminMiddleware, ListArrivalsProduct);
+
+
+/**
+ * @swagger
+ * /api/admin/ContactUsLists:
+ *   get:
+ *     summary: Get All New Arrivals
+ *     tags: [New Arrivals]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: New arrivals fetched successfully
+ */
+Adminrouter.get("/ContactUsLists", adminMiddleware, ContactUsList);
+
+ 
 
 /**
  * @swagger

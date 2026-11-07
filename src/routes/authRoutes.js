@@ -24,6 +24,7 @@ import DeleteCartProductfunction from "../controllers/DeleteList.js";
  import AddWishlist from "../controllers/WishlistController.js";
  import GetWishlist from "../controllers/GetWishlist.js";
  import RemoveWishlist from "../controllers/DeleteWishlist.js";
+import ContactUsUser from "../controllers/ContactUsController.js";
 
 const router = express.Router();
 
@@ -415,7 +416,52 @@ router.get("/GetWishlist", authMiddleware, GetWishlist);
  
 router.delete("/RemoveWishlist", authMiddleware, RemoveWishlist);
 
+/**
+ * @swagger
+ * tags:
+ *   name: Contact Us
+ *   description: Customer Contact APIs
+ */
 
+/**
+ * @swagger
+ * /api/v/ContactUsUser:
+ *   post:
+ *     summary: Submit contact message
+ *     tags: [Contact Us]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - name
+ *               - email
+ *               - subject
+ *               - message
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: MD Faruk
+ *               email:
+ *                 type: string
+ *                 example: faruk@gmail.com
+ *               subject:
+ *                 type: string
+ *                 example: Order related query
+ *               message:
+ *                 type: string
+ *                 example: I need help with my order.
+ *     responses:
+ *       201:
+ *         description: Contact message submitted successfully
+ *       400:
+ *         description: All fields are required
+ *       500:
+ *         description: Server error
+ */
+router.post("/ContactUsUser", ContactUsUsers);
  
 export default router;
 
