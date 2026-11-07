@@ -573,20 +573,7 @@ Adminrouter.put("/EditArrivalsProducts", adminMiddleware, EditArrivalsProduct);
  */
 Adminrouter.get("/ListArrivalsProducts", adminMiddleware, ListArrivalsProduct);
 
-
-/**
- * @swagger
- * /api/admin/ContactUsLists:
- *   get:
- *     summary: Get All New Arrivals
- *     tags: [New Arrivals]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: New arrivals fetched successfully
- */
-Adminrouter.get("/ContactUsLists", adminMiddleware, ContactUsList);
+ 
 
  
 
@@ -632,7 +619,19 @@ Adminrouter.delete("/DeleteArrivalsProducts", adminMiddleware, DeleteArrivalsPro
  */
 Adminrouter.delete("/DeletedUsers", adminMiddleware, DeletedUser);
  
-
+/**
+ * @swagger
+ * /api/admin/ContactUsUsers:
+ *   post:
+ *     summary: Submit Contact Us Message
+ *     tags: [Contact Us]
+ *     responses:
+ *       201:
+ *         description: Contact message submitted successfully
+ *       400:
+ *         description: All fields are required
+ */
+Adminrouter.post("/ContactUsUsers", ContactUsUsers);
 export default Adminrouter;
 
 
