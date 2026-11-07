@@ -1,54 +1,46 @@
 import NewAddress from "../models/NewAddress.js";
 
-const listContactUsUsers = async (req, res) => {
-  try {
-    const {
-      fullName,
-      phoneNumber,
-      addressLine,
-      city,
-      state,
-      pincode,
-    } = req.body || {};
+ 
 
-    if (
-      !fullName ||
-      !phoneNumber ||
-      !addressLine ||
-      !city ||
-      !state ||
-      !pincode
-    ) {
-      return res.status(400).json({
-        success: false,
-        message: "All fields are required",
-      });
+
+
+
+ 
+
+ const listContactUsUsers = async(req,res)=>{
+     try
+     {
+
+              const { search } = req.query;
+
+    let filter = {};
+
+    if (search && search.trim()) {
+      const searchRegex = new RegExp(
+        search.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+        "i"
+      );
+
+      filter = {
+        $or: [
+          { fullName: searchRegex },
+          { phoneNumber: searchRegex },
+          { city: searchRegex },
+        ],
+      };
     }
-
-    const AddressCreate = await NewAddress.create({
-      fullName,
-      phoneNumber,
-      addressLine,
-      city,
-      state,
-      pincode,
-    });
-
-    return res.status(201).json({
-      success: true,
-      message: "Address added successfully",
-      address: AddressCreate,
-    });
-
-  } catch (error) {
-    console.log("Address Error:", error);
-
-    return res.status(500).json({
-      success: false,
-      message: "Server error",
-      error: error.message,
-    });
-  }
-};
+  const UserGetMenProdut = await NewAddress.find(filter).sort({_id:-1})
+  return res.status(200).json({
+         message: "New Address fetched successfully",
+     
+       NewAddresslist:UserGetMenProdut
+  })
+     }
+     catch(error){
+     return res.status(500).json({
+       message: "Server error"
+     });
+     }
+ }
 
 export default listContactUsUsers;
