@@ -1,6 +1,6 @@
 import NewAddress from "../models/NewAddress.js";
 
- const listContactUsUsers = async (req, res) => {
+const listContactUsUsers = async (req, res) => {
   try {
     const {
       fullName,
@@ -9,7 +9,7 @@ import NewAddress from "../models/NewAddress.js";
       city,
       state,
       pincode,
-    } = req.body;
+    } = req.body || {};
 
     if (
       !fullName ||
@@ -41,6 +41,8 @@ import NewAddress from "../models/NewAddress.js";
     });
 
   } catch (error) {
+    console.log("Address Error:", error);
+
     return res.status(500).json({
       success: false,
       message: "Server error",
