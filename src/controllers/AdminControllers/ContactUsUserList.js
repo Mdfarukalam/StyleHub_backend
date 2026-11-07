@@ -28,7 +28,7 @@ const ContactUsList = async(req,res)=>{
     });
 
  return res.status(200).json({
-       message: "Contact Us fetched successfully",
+       message: "Contact Us fetched successfully.",
       ContactUs: fetchAllKid
  })
     }
