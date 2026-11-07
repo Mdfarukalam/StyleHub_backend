@@ -28,6 +28,13 @@ import ContactUsUser from "../controllers/ContactUsController.js";
 import listContactUsUsers from "../controllers/ListNewAddressController.js";
 import addNewAddress from "../controllers/NewAddressController.js";
 
+
+import {
+  createOrder,
+  getMyOrders,
+  getSingleOrder,
+} from "../controllers/OrderControler.js";
+
 const router = express.Router();
 
 /**
@@ -527,6 +534,104 @@ router.delete("/RemoveWishlist", authMiddleware, RemoveWishlist);
  *         description: Server error
  */
 router.get("/listContactUsUsersnew", authMiddleware, listContactUsUsers);
+
+
+
+/**
+ * @swagger
+ * tags:
+ *   name: Order
+ *   description: Customer Order APIs
+ */
+
+
+/**
+ * @swagger
+ * /api/order/CreateOrder:
+ *   post:
+ *     summary: Place a new order
+ *     tags: [Order]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - deliveryAddress
+ *             properties:
+ *               deliveryAddress:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                     example: 6aeefe091ab544302f933584
+ *               paymentMethod:
+ *                 type: string
+ *                 enum: [COD, ONLINE]
+ *                 example: COD
+ *     responses:
+ *       201:
+ *         description: Order placed successfully
+ *       400:
+ *         description: Invalid request or empty cart
+ *       401:
+ *         description: Unauthorized
+ *       500:
+ *         description: Server error
+ */
+router.post("/CreateOrder", authMiddleware, createOrder);
+
+
+/**
+ * @swagger
+ * /api/order/MyOrders:
+ *   get:
+ *     summary: Get all orders of logged-in user
+ *     tags: [Order]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Orders fetched successfully
+ *       401:
+ *         description: Unauthorized
+ *       500:
+ *         description: Server error
+ */
+router.get("/MyOrders", authMiddleware, getMyOrders);
+
+
+/**
+ * @swagger
+ * /api/order/SingleOrder/{orderId}:
+ *   get:
+ *     summary: Get single order details
+ *     tags: [Order]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: orderId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: MongoDB Order ID
+ *     responses:
+ *       200:
+ *         description: Order details fetched successfully
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: Order not found
+ *       500:
+ *         description: Server error
+ */
+router.get("/SingleOrder/:orderId", authMiddleware, getSingleOrder);
+
+
 
 export default router;
 
