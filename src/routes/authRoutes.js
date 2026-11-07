@@ -25,6 +25,8 @@ import DeleteCartProductfunction from "../controllers/DeleteList.js";
  import GetWishlist from "../controllers/GetWishlist.js";
  import RemoveWishlist from "../controllers/DeleteWishlist.js";
 import ContactUsUser from "../controllers/ContactUsController.js";
+import listContactUsUsers from "../controllers/ListNewAddressController.jsx";
+import addNewAddress from "../controllers/NewAddressController.jsx";
 
 const router = express.Router();
 
@@ -457,5 +459,74 @@ router.delete("/RemoveWishlist", authMiddleware, RemoveWishlist);
  */
  
  router.post("/ContactUsUsersadd", authMiddleware, ContactUsUser);
+
+
+
+
+
+
+ /**
+ * @swagger
+ * /api/auth/addNewAddressnew:
+ *   post:
+ *     summary: Submit contact message
+ *     tags: [Contact Us]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - name
+ *               - email
+ *               - subject
+ *               - message
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: MD Faruk
+ *               email:
+ *                 type: string
+ *                 example: faruk@gmail.com
+ *               subject:
+ *                 type: string
+ *                 example: Order related query
+ *               message:
+ *                 type: string
+ *                 example: I need help with my order.
+ *     responses:
+ *       201:
+ *         description: Contact message submitted successfully
+ *       400:
+ *         description: All fields are required
+ *       500:
+ *         description: Server error
+ */
+ 
+ router.post("/addNewAddressnew", authMiddleware, addNewAddress);
+
+
+
+
+
+ /**
+ * @swagger
+ * /api/auth/listContactUsUsersnew:
+ *   get:
+ *     summary: Get all cart products of logged-in user
+ *     tags: [Cart]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User cart products fetched successfully
+ *       401:
+ *         description: Unauthorized
+ *       500:
+ *         description: Server error
+ */
+router.get("/listContactUsUsersnew", authMiddleware, listContactUsUsers);
+
 export default router;
 
