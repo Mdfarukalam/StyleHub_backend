@@ -54,6 +54,11 @@ colorVariants: [
         required: true,
     },
 
+        name: {
+      type: String,
+      required: true,
+    },
+
   },
 ],
     stock: {

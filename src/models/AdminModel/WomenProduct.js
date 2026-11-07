@@ -55,6 +55,11 @@ const WomenProductSchema = new mongoose.Schema({
         required: true,
     },
 
+        name: {
+      type: String,
+      required: true,
+    },
+
   },
 ],
  

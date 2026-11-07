@@ -55,7 +55,10 @@ const ArrivalsProductSchema = new mongoose.Schema({
         required: true,
     },
 
-
+    name: {
+      type: String,
+      required: true,
+    },
   },
 ],
     stock: {
