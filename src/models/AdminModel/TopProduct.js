@@ -14,7 +14,20 @@ const TopProductSchema = new mongoose.Schema({
     category: {
         type: String,
       
-        enum: ["T-Shirts", "Jeans", "Shirts", "Jackets"]
+        enum: [  "T-Shirts",
+  "Shirts",
+  "Jeans",
+  "Jackets",
+  "Kurtis",
+  "Tops",
+  "Sarees",
+  "Dresses",
+  "Skirts",
+  "Lehengas",
+  "Kids Wear",
+  "Shoes",
+  "Accessories",
+  "Other"]
 
     },
 

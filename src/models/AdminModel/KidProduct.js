@@ -14,7 +14,30 @@ const KidProductSchema = new mongoose.Schema({
     category: {
         type: String,
       
-        enum: ["T-Shirts", "Jeans", "Shirts", "Jackets"]
+        enum: [  "T-Shirts",
+  "Shirts",
+  "Jeans",
+  "Shorts",
+  "Trousers",
+  "Jackets",
+  "Hoodies",
+  "Sweatshirts",
+  "Sweaters",
+  "Dresses",
+  "Frocks",
+  "Kurtis",
+  "Tops",
+  "Leggings",
+  "Skirts",
+  "Co-Ord Sets",
+  "Ethnic Wear",
+  "Party Wear",
+  "Nightwear",
+  "Track Pants",
+  "Tracksuits",
+  "Rompers",
+  "Jumpsuits",
+  "School Uniform"]
 
     },
 

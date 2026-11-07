@@ -14,7 +14,28 @@ const MenProductSchema = new mongoose.Schema({
     category: {
         type: String,
       
-        enum: ["T-Shirts", "Jeans", "Shirts", "Jackets"]
+        enum: [  "T-Shirts",
+  "Jeans",
+  "Shirts",
+  "Jackets",
+  "Hoodies",
+  "Sweatshirts",
+  "Sweaters",
+  "Polo T-Shirts",
+  "Casual Shirts",
+  "Formal Shirts",
+  "Trousers",
+  "Shorts",
+  "Track Pants",
+  "Joggers",
+  "Blazers",
+  "Suits",
+  "Kurtas",
+  "Ethnic Wear",
+  "Tracksuits",
+  "Co-Ord Sets",
+  "Innerwear",
+  "Nightwear"]
 
     },
 
