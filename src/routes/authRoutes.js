@@ -25,8 +25,8 @@ import DeleteCartProductfunction from "../controllers/DeleteList.js";
  import GetWishlist from "../controllers/GetWishlist.js";
  import RemoveWishlist from "../controllers/DeleteWishlist.js";
 import ContactUsUser from "../controllers/ContactUsController.js";
-import listContactUsUsers from "../controllers/ListNewAddressController.jsx";
-import addNewAddress from "../controllers/NewAddressController.jsx";
+import listContactUsUsers from "../controllers/ListNewAddressController.js";
+import addNewAddress from "../controllers/NewAddressController.js";
 
 const router = express.Router();
 
