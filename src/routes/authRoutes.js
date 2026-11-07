@@ -547,7 +547,7 @@ router.get("/listContactUsUsersnew", authMiddleware, listContactUsUsers);
 
 /**
  * @swagger
- * /api/order/CreateOrder:
+ * /api/auth/CreateOrder:
  *   post:
  *     summary: Place a new order
  *     tags: [Order]
@@ -587,7 +587,7 @@ router.post("/CreateOrder", authMiddleware, createOrder);
 
 /**
  * @swagger
- * /api/order/MyOrders:
+ * /api/auth/MyOrders:
  *   get:
  *     summary: Get all orders of logged-in user
  *     tags: [Order]
@@ -606,7 +606,7 @@ router.get("/MyOrders", authMiddleware, getMyOrders);
 
 /**
  * @swagger
- * /api/order/SingleOrder/{orderId}:
+ * /api/auth/SingleOrder:
  *   get:
  *     summary: Get single order details
  *     tags: [Order]
@@ -629,7 +629,7 @@ router.get("/MyOrders", authMiddleware, getMyOrders);
  *       500:
  *         description: Server error
  */
-router.get("/SingleOrder/:orderId", authMiddleware, getSingleOrder);
+router.get("/SingleOrder", authMiddleware, getSingleOrder);
 
 
 
