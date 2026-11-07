@@ -631,7 +631,7 @@ Adminrouter.delete("/DeletedUsers", adminMiddleware, DeletedUser);
  *       400:
  *         description: All fields are required
  */
-Adminrouter.post("/ContactUsUsers", ContactUsUsers);
+Adminrouter.post("/ContactUsUsers", adminMiddleware,ContactUsList);
 export default Adminrouter;
 
 
