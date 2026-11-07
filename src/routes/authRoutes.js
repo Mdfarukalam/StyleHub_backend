@@ -416,13 +416,7 @@ router.get("/GetWishlist", authMiddleware, GetWishlist);
  
 router.delete("/RemoveWishlist", authMiddleware, RemoveWishlist);
 
-/**
- * @swagger
- * tags:
- *   name: Contact Us
- *   description: Customer Contact APIs
- */
-
+ 
 /**
  * @swagger
  * /api/auth/ContactUsUsersadd:

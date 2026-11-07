@@ -1,4 +1,4 @@
-import ContactUs from "../models/ContactUs"
+import ContactUs from "../models/ContactUs.js"
  
 
  const ContactUsUser = async (Req, res) => {
