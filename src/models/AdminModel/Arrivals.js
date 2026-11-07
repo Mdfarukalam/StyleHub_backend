@@ -2,11 +2,7 @@ import mongoose from "mongoose";
 
 
 const ArrivalsProductSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        trim: true
-    },
+ 
     brand: {
         type: String,
         required: true,
