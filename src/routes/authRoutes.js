@@ -425,7 +425,7 @@ router.delete("/RemoveWishlist", authMiddleware, RemoveWishlist);
 
 /**
  * @swagger
- * /api/v/ContactUsUser:
+ * /api/auth/ContactUsUsers:
  *   post:
  *     summary: Submit contact message
  *     tags: [Contact Us]
@@ -461,7 +461,7 @@ router.delete("/RemoveWishlist", authMiddleware, RemoveWishlist);
  *       500:
  *         description: Server error
  */
-router.post("/ContactUsUser", ContactUsUsers);
+router.post("/ContactUsUsers", ContactUsUser);
  
 export default router;
 
