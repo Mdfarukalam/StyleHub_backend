@@ -24,7 +24,7 @@ import ContactUs from "../models/ContactUs"
             }
         );
         return res.status(201).json({
-            message: "Signup successful",
+            message: "Contact Us successfully",
             User:UserCreate
         })
     }

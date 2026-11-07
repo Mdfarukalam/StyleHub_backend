@@ -461,7 +461,7 @@ router.delete("/RemoveWishlist", authMiddleware, RemoveWishlist);
  *       500:
  *         description: Server error
  */
-router.post("/ContactUsUsers", ContactUsUser);
  
+ router.post("/ContactUsUsers", authMiddleware, ContactUsUser);
 export default router;
 
