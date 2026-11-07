@@ -1,5 +1,9 @@
+
 import Wishlist_product from "../models/Wishlist.js";
-import Cart from "../models/Cart.js";
+
+import MenProduct from "../models/AdminModel/MenProduct.js";
+import KidProduct from "../models/AdminModel/KidProduct.js";
+import WomenProduct from "../models/AdminModel/WomenProduct.js";
 
 const GetWishlist = async (req, res) => {
   try {
@@ -8,22 +12,28 @@ const GetWishlist = async (req, res) => {
     // Get wishlist data
     const wishlist = await Wishlist_product.find({
       userId,
-    })
-      .sort({ _id: -1 })
-      .lean();
+    }).sort({ _id: -1 }).lean();
 
-    // Check productId in Cart collection
+    // Match productId with all 3 collections
     const wishlistProducts = await Promise.all(
       wishlist.map(async (item) => {
 
-        const cartProduct = await Cart.findOne({
-          userId,
-          productId: item.productId,
-        }).lean();
+        const productId = item.productId;
+
+        const [menProduct, kidProduct, womenProduct] =
+          await Promise.all([
+            MenProduct.findById(productId).lean(),
+            KidProduct.findById(productId).lean(),
+            WomenProduct.findById(productId).lean(),
+          ]);
+
+        // Get matched product
+        const productDetails =
+          menProduct || kidProduct || womenProduct || null;
 
         return {
           ...item,
-          cartDetails: cartProduct || null,
+          productDetails,
         };
       })
     );
