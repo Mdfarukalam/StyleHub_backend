@@ -693,7 +693,7 @@ router.get("/SingleOrder", authMiddleware, getSingleOrder);
  *       500:
  *         description: Server error
  */
-router.post("/EditNewAddressnew", authMiddleware, EditNewAddress);
+router.put("/EditNewAddressnew", authMiddleware, EditNewAddress);
 
 
  
