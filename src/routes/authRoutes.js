@@ -423,7 +423,7 @@ router.get("/GetWishlist", authMiddleware, GetWishlist);
  *         description: Unauthorized
  */
  
-router.delete("/RemoveWishlist", authMiddleware, RemoveWishlist);
+router.delete("/RemoveWishlists", authMiddleware, RemoveWishlist);
 
  
 /**
