@@ -1,6 +1,6 @@
 
 import mongoose from "mongoose";
-import Order from "../../models/Order";
+import Order from "../../models/Order.js";
 
 const updateOrderStatus = async (req, res) => {
   try {
