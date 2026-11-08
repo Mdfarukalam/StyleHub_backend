@@ -27,6 +27,8 @@ import DeleteCartProductfunction from "../controllers/DeleteList.js";
 import ContactUsUser from "../controllers/ContactUsController.js";
 import listContactUsUsers from "../controllers/ListNewAddressController.js";
 import addNewAddress from "../controllers/NewAddressController.js";
+import DeleteNewAddress from "../controllers/addNewAddressDelete.js";
+import EditNewAddress from "../controllers/addNewAddressEdite.js";
 
 
 import {
@@ -630,6 +632,108 @@ router.get("/MyOrders", authMiddleware, getMyOrders);
  *         description: Server error
  */
 router.get("/SingleOrder", authMiddleware, getSingleOrder);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * @swagger
+ * tags:
+ *   name: Order
+ *   description: Customer Order APIs
+ */
+
+
+/**
+ * @swagger
+ * /api/auth/EditNewAddressnew:
+ *   post:
+ *     summary: Place a new order
+ *     tags: [Order]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - deliveryAddress
+ *             properties:
+ *               deliveryAddress:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                     example: 6aeefe091ab544302f933584
+ *               paymentMethod:
+ *                 type: string
+ *                 enum: [COD, ONLINE]
+ *                 example: COD
+ *     responses:
+ *       201:
+ *         description: Order placed successfully
+ *       400:
+ *         description: Invalid request or empty cart
+ *       401:
+ *         description: Unauthorized
+ *       500:
+ *         description: Server error
+ */
+router.post("/EditNewAddressnew", authMiddleware, EditNewAddress);
+
+
+ 
+
+/**
+ * @swagger
+ * /api/auth/DeleteNewAddressnew:
+ *   delete:
+ *     summary: Remove product from wishlist
+ *     tags: [Wishlist]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - productId
+ *               - productType
+ *             properties:
+ *               productId:
+ *                 type: string
+ *                 example: "672a12345678901234567890"
+ *               productType:
+ *                 type: string
+ *                 enum: [men, women, kids, top-product, new-arrivals]
+ *                 example: men
+ *     responses:
+ *       200:
+ *         description: Product removed from wishlist
+ *       404:
+ *         description: Product not found in wishlist
+ *       401:
+ *         description: Unauthorized
+ */
+ 
+router.delete("/DeleteNewAddressnew", authMiddleware, DeleteNewAddress);
+
 
 
 
