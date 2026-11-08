@@ -632,7 +632,7 @@ Adminrouter.delete("/DeletedUsers", adminMiddleware, DeletedUser);
  *       400:
  *         description: All fields are required
  */
-Adminrouter.post("/ContactUsUsers", adminMiddleware,ContactUsList);
+Adminrouter.get("/ContactUsUsers", adminMiddleware,ContactUsList);
 
 /**
  * @swagger
@@ -646,7 +646,7 @@ Adminrouter.post("/ContactUsUsers", adminMiddleware,ContactUsList);
  *       400:
  *         description: All fields are required
  */
-Adminrouter.post("/Orderall_products", adminMiddleware,Orderall_product_data);
+Adminrouter.get("/Orderall_products", adminMiddleware,Orderall_product_data);
 
 
 
