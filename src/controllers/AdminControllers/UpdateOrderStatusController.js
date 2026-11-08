@@ -4,7 +4,7 @@ import Order from "../../models/Order.js";
 
 const updateOrderStatus = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } =  req.query;
     const { orderStatus } = req.body;
 
     const allowedStatuses = [
