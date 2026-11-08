@@ -2,10 +2,10 @@ import Wishlist_product from "../models/Wishlist.js";
 
 const RemoveWishlist = async (req, res) => {
   try {
-    const { productId } = req.query;
+    const { id } = req.query;
     const userId = req.user.id;
 
-    if (!productId) {
+    if (!id) {
       return res.status(400).json({
         success: false,
         message: "Product ID is required",
@@ -13,8 +13,8 @@ const RemoveWishlist = async (req, res) => {
     }
 
     const wishlist = await Wishlist_product.findOneAndDelete({
-      userId,
-      productId,
+   _id: id,
+      userId: req.user.id,
     });
 
     if (!wishlist) {
