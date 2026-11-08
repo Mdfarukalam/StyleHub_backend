@@ -29,7 +29,7 @@ import listContactUsUsers from "../controllers/ListNewAddressController.js";
 import addNewAddress from "../controllers/NewAddressController.js";
 import DeleteNewAddress from "../controllers/addNewAddressDelete.js";
 import EditNewAddress from "../controllers/addNewAddressEdite.js";
-
+import cancelOrder from "../controllers/CancelOrderController.js";
 
 import {
   createOrder,
@@ -733,6 +733,41 @@ router.put("/EditNewAddressnew", authMiddleware, EditNewAddress);
  */
  
 router.delete("/DeleteNewAddressnew", authMiddleware, DeleteNewAddress);
+/**
+ * @swagger
+ * /api/auth/cancelOrders:
+ *   delete:
+ *     summary: Remove product from wishlist
+ *     tags: [Wishlist]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - productId
+ *               - productType
+ *             properties:
+ *               productId:
+ *                 type: string
+ *                 example: "672a12345678901234567890"
+ *               productType:
+ *                 type: string
+ *                 enum: [men, women, kids, top-product, new-arrivals]
+ *                 example: men
+ *     responses:
+ *       200:
+ *         description: Product removed from wishlist
+ *       404:
+ *         description: Product not found in wishlist
+ *       401:
+ *         description: Unauthorized
+ */
+ 
+router.delete("/cancelOrders", authMiddleware, cancelOrder);
 
 
 
