@@ -8,12 +8,12 @@ const RemoveWishlist = async (req, res) => {
     if (!id) {
       return res.status(400).json({
         success: false,
-        message: "Product ID is required",
+        message: "ID is required",
       });
     }
 
     const wishlist = await Wishlist_product.findOneAndDelete({
-   _id: id,
+      _id: id,
       userId: req.user.id,
     });
 
