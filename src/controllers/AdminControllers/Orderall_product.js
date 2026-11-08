@@ -2,15 +2,16 @@
 
 import Order from "../../models/Order.js";
 
-  const Orderall_product_data = async (req, res) => {
+const Orderall_product_data = async (req, res) => {
   try {
-    const orders = await Order.find({
-      userId: req.user.id,
-    }).sort({ createdAt: -1 });
+    const orders = await Order.find({})
+      .sort({ createdAt: -1 })
+      .populate("userId", "fullName Email phoneNumber");
 
     return res.status(200).json({
       success: true,
-      message: "Orders fetched successfully",
+      message: "All orders fetched successfully",
+      totalOrders: orders.length,
       orders,
     });
 
@@ -21,4 +22,5 @@ import Order from "../../models/Order.js";
     });
   }
 };
+
 export default Orderall_product_data;
