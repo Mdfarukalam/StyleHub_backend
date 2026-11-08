@@ -40,7 +40,8 @@ import DeletedUser from "../controllers/AdminControllers/DeleteUser.js";
 
 
 import ContactUsList from "../controllers/AdminControllers/ContactUsUserList.js";
-
+import Orderall_product_data from "../controllers/AdminControllers/Orderall_product.js";
+import updateOrderStatus from "../controllers/AdminControllers/UpdateOrderStatusController.js";
 const Adminrouter = express.Router();
 
 /**
@@ -632,6 +633,47 @@ Adminrouter.delete("/DeletedUsers", adminMiddleware, DeletedUser);
  *         description: All fields are required
  */
 Adminrouter.post("/ContactUsUsers", adminMiddleware,ContactUsList);
+
+/**
+ * @swagger
+ * /api/admin/Orderall_products:
+ *   post:
+ *     summary: Submit Contact Us Message
+ *     tags: [Contact Us]
+ *     responses:
+ *       201:
+ *         description: Contact message submitted successfully
+ *       400:
+ *         description: All fields are required
+ */
+Adminrouter.post("/Orderall_products", adminMiddleware,Orderall_product_data);
+
+
+
+
+/**
+ * @swagger
+ * /api/admin/updateOrderStatuss:
+ *   put:
+ *     summary: Edit Men Product
+ *     tags: [Men Products]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ProductUpdate'
+ *     responses:
+ *       200:
+ *         description: Men product updated successfully
+ *       404:
+ *         description: Product not found
+ */
+Adminrouter.put("/updateOrderStatuss", adminMiddleware, updateOrderStatus);
+
+ 
 export default Adminrouter;
 
 
