@@ -4,7 +4,7 @@ import Order from "../models/Order.js";
 
 const cancelOrder = async (req, res) => {
   try {
-    const { orderId } = req.params;
+    const { orderId } = req.query;
     const userId = req.user.id;
 
     // Validate Order ID
