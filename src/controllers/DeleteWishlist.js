@@ -28,6 +28,7 @@ const RemoveWishlist = async (req, res) => {
       success: true,
       message: "Product removed from wishlist",
     });
+
   } catch (error) {
     return res.status(500).json({
       success: false,
