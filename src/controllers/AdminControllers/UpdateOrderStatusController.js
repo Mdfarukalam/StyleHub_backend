@@ -4,7 +4,7 @@ import Order from "../../models/Order.js";
 
 const updateOrderStatus = async (req, res) => {
   try {
-    const { orderId } = req.params;
+    const { id } = req.params;
     const { orderStatus } = req.body;
 
     const allowedStatuses = [
@@ -15,7 +15,7 @@ const updateOrderStatus = async (req, res) => {
       "Cancelled",
     ];
 
-    if (!mongoose.Types.ObjectId.isValid(orderId)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({
         success: false,
         message: "Invalid Order ID",
@@ -30,7 +30,7 @@ const updateOrderStatus = async (req, res) => {
     }
 
     const order = await Order.findByIdAndUpdate(
-      orderId,
+      id,
       { orderStatus },
       { new: true, runValidators: true }
     );
