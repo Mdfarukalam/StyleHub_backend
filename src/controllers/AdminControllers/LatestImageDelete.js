@@ -3,7 +3,7 @@ const DeletedLatestImage = async(req,res)=>{
     try{
 const {id}= req.query
 
-const LatestImagedelete= await User.LatestImage(id)
+const LatestImagedelete= await LatestImage.findByIdAndDelete(id)
 if(!LatestImagedelete){
     return res.status(400).json({
    message: "Latest Image not found"
