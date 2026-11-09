@@ -30,7 +30,7 @@ import addNewAddress from "../controllers/NewAddressController.js";
 import DeleteNewAddress from "../controllers/addNewAddressDelete.js";
 import EditNewAddress from "../controllers/addNewAddressEdite.js";
 import cancelOrder from "../controllers/CancelOrderController.js";
-
+import UserSideLatestImage from "../controllers/UserSideLatestImage.js";
 import {
   createOrder,
   getMyOrders,
@@ -770,7 +770,21 @@ router.delete("/DeleteNewAddressnew", authMiddleware, DeleteNewAddress);
 router.delete("/cancelOrders", authMiddleware, cancelOrder);
 
 
-
+/**
+ * @swagger
+ * /api/auth/UserSideLatestImage:
+ *   get:
+ *     summary: Get logged-in user profile
+ *     tags: [User UserSideLatestImage]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: UserSideLatestImage fetched successfully
+ *       401:
+ *         description: Unauthorized
+ */
+router.get("/UserSideLatestImages", authMiddleware, UserSideLatestImage);
 
 export default router;
 
