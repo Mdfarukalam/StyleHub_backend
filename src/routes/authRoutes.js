@@ -784,7 +784,7 @@ router.delete("/cancelOrders", authMiddleware, cancelOrder);
  *       401:
  *         description: Unauthorized
  */
-router.get("/UserSideLatestImages", authMiddleware, UserSideLatestImage);
+router.get("/UserSideLatestImages", UserSideLatestImage);
 
 export default router;
 
