@@ -42,6 +42,11 @@ import DeletedUser from "../controllers/AdminControllers/DeleteUser.js";
 import ContactUsList from "../controllers/AdminControllers/ContactUsUserList.js";
 import Orderall_product_data from "../controllers/AdminControllers/Orderall_product.js";
 import updateOrderStatus from "../controllers/AdminControllers/UpdateOrderStatusController.js";
+
+import GetLatestImage from "../controllers/AdminControllers/LatestImageList.js";
+import EditeLatestImage from "../controllers/AdminControllers/LatestImageEdite.js";
+import DeletedLatestImage from "../controllers/AdminControllers/LatestImageDelete.js";
+import AddLatestImage from "../controllers/AdminControllers/LatestImageAdd.js";
 const Adminrouter = express.Router();
 
 /**
@@ -673,6 +678,134 @@ Adminrouter.get("/Orderall_products", adminMiddleware,Orderall_product_data);
  */
 Adminrouter.put("/updateOrderStatuss", adminMiddleware, updateOrderStatus);
 
+
+
+
+
+
+/**
+ * @swagger
+ * tags:
+ *   name: LatestImage
+ *   description: Admin Latest Image Management APIs
+ */
+
+
+/**
+ * @swagger
+ * /api/admin/AddLatestImage:
+ *   post:
+ *     summary: Add latest image
+ *     tags: [LatestImage]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - images
+ *             properties:
+ *               images:
+ *                 type: string
+ *                 example: https://res.cloudinary.com/demo/latest-image.jpg
+ *     responses:
+ *       201:
+ *         description: Latest image added successfully
+ *       400:
+ *         description: Image is required
+ *       500:
+ *         description: Server error
+ */
+
+
+/**
+ * @swagger
+ * /api/admin/GetLatestImage:
+ *   get:
+ *     summary: Get all latest images
+ *     tags: [LatestImage]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Latest images fetched successfully
+ *       500:
+ *         description: Server error
+ */
+
+
+/**
+ * @swagger
+ * /api/admin/EditeLatestImage:
+ *   put:
+ *     summary: Update latest image
+ *     tags: [LatestImage]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Latest image ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - images
+ *             properties:
+ *               images:
+ *                 type: string
+ *                 example: https://res.cloudinary.com/demo/updated-image.jpg
+ *     responses:
+ *       200:
+ *         description: Latest image updated successfully
+ *       400:
+ *         description: Invalid image ID
+ *       404:
+ *         description: Latest image not found
+ *       500:
+ *         description: Server error
+ */
+
+
+/**
+ * @swagger
+ * /api/admin/DeletedLatestImage:
+ *   delete:
+ *     summary: Delete latest image
+ *     tags: [LatestImage]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Latest image ID
+ *     responses:
+ *       200:
+ *         description: Latest image deleted successfully
+ *       400:
+ *         description: Invalid image ID
+ *       404:
+ *         description: Latest image not found
+ *       500:
+ *         description: Server error
+ */
+
+Adminrouter.post("/AddLatestImage", adminMiddleware, AddLatestImage);
+Adminrouter.get("/GetLatestImage", adminMiddleware, GetLatestImage);
+Adminrouter.put("/EditeLatestImage", adminMiddleware, EditeLatestImage);
+Adminrouter.delete("/DeletedLatestImage", adminMiddleware, DeletedLatestImage);
  
 export default Adminrouter;
 
