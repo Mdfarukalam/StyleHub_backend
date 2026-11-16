@@ -9,39 +9,49 @@ const GetWishlist = async (req, res) => {
   try {
     const userId = req.user.id;
 
+    // Get user's wishlist
     const wishlist = await Wishlist_product.find({ userId })
       .sort({ _id: -1 })
       .lean();
 
+    // Fetch matching products
     const wishlistProducts = await Promise.all(
       wishlist.map(async (item) => {
+
         const productId = item.productId;
 
-        // Search inside colorVariants array
-        const [menProduct, kidProduct, womenProduct] =
-          await Promise.all([
-            MenProduct.findOne({
-              "colorVariants._id": productId,
-            }).lean(),
+        // Select collection using productType
+        let ProductModel;
 
-            KidProduct.findOne({
-              "colorVariants._id": productId,
-            }).lean(),
+        switch (item.productType?.toLowerCase()) {
+          case "men":
+            ProductModel = MenProduct;
+            break;
 
-            WomenProduct.findOne({
-              "colorVariants._id": productId,
-            }).lean(),
-          ]);
+          case "women":
+            ProductModel = WomenProduct;
+            break;
 
-        const productDetails =
-          menProduct || kidProduct || womenProduct;
+          case "kids":
+          case "kid":
+            ProductModel = KidProduct;
+            break;
 
-        if (!productDetails) {
+          default:
+            return null;
+        }
+
+        // Match productId inside colorVariants array
+        const product = await ProductModel.findOne({
+          "colorVariants._id": productId,
+        }).lean();
+
+        if (!product) {
           return null;
         }
 
-        // Get only matched color variant
-        const matchedVariant = productDetails.colorVariants.find(
+        // Find exact matching color variant
+        const matchedVariant = product.colorVariants?.find(
           (variant) =>
             variant._id.toString() === productId.toString()
         );
@@ -49,6 +59,12 @@ const GetWishlist = async (req, res) => {
         if (!matchedVariant) {
           return null;
         }
+
+        // Return only matching color variant
+        const productDetails = {
+          ...product,
+          colorVariants: [matchedVariant],
+        };
 
         return {
           ...item,
@@ -65,6 +81,8 @@ const GetWishlist = async (req, res) => {
     });
 
   } catch (error) {
+    console.error("GetWishlist Error:", error);
+
     return res.status(500).json({
       success: false,
       message: error.message,
