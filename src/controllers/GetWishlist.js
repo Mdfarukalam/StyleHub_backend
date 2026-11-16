@@ -4,9 +4,8 @@ import Wishlist_product from "../models/Wishlist.js";
 import MenProduct from "../models/AdminModel/MenProduct.js";
 import KidProduct from "../models/AdminModel/KidProduct.js";
 import WomenProduct from "../models/AdminModel/WomenProduct.js";
-  import TopProduct from "../models/AdminModel/TopProduct.js";
-  import ArrivalsProduct from "../models/AdminModel/Arrivals.js";
-
+import TopProduct from "../models/AdminModel/TopProduct.js";
+import ArrivalsProduct from "../models/AdminModel/Arrivals.js";
 
 const GetWishlist = async (req, res) => {
   try {
@@ -20,13 +19,17 @@ const GetWishlist = async (req, res) => {
     // Fetch matching products
     const wishlistProducts = await Promise.all(
       wishlist.map(async (item) => {
-
         const productId = item.productId;
 
-        // Select collection using productType
+        // Normalize productType
+        const productType = item.productType
+          ?.toLowerCase()
+          .replace(/[\s-]/g, "_");
+
+        // Select collection
         let ProductModel;
 
-        switch (item.productType?.toLowerCase()) {
+        switch (productType) {
           case "men":
             ProductModel = MenProduct;
             break;
@@ -40,19 +43,23 @@ const GetWishlist = async (req, res) => {
             ProductModel = KidProduct;
             break;
 
-                      case "Top_product":
+          case "top_product":
+          case "topproduct":
             ProductModel = TopProduct;
             break;
-                      case "New_Arrivals":
+
+          case "new_arrivals":
+          case "new_arrival":
+          case "arrivals":
             ProductModel = ArrivalsProduct;
             break;
 
-
           default:
+            console.log("Invalid productType:", item.productType);
             return null;
         }
 
-        // Match productId inside colorVariants array
+        // Find product using colorVariants._id
         const product = await ProductModel.findOne({
           "colorVariants._id": productId,
         }).lean();
@@ -61,7 +68,7 @@ const GetWishlist = async (req, res) => {
           return null;
         }
 
-        // Find exact matching color variant
+        // Find exact matching variant
         const matchedVariant = product.colorVariants?.find(
           (variant) =>
             variant._id.toString() === productId.toString()
@@ -71,7 +78,7 @@ const GetWishlist = async (req, res) => {
           return null;
         }
 
-        // Return only matching color variant
+        // Return only matching variant
         const productDetails = {
           ...product,
           colorVariants: [matchedVariant],
