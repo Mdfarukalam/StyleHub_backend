@@ -9,9 +9,7 @@ const GetWishlist = async (req, res) => {
   try {
     const userId = req.user.id;
 
-    const wishlist = await Wishlist_product.find({
-      userId,
-    })
+    const wishlist = await Wishlist_product.find({ userId })
       .sort({ _id: -1 })
       .lean();
 
@@ -19,7 +17,7 @@ const GetWishlist = async (req, res) => {
       wishlist.map(async (item) => {
         const productId = item.productId;
 
-        // Match productId with colorVariants._id
+        // Search inside colorVariants array
         const [menProduct, kidProduct, womenProduct] =
           await Promise.all([
             MenProduct.findOne({
@@ -36,12 +34,21 @@ const GetWishlist = async (req, res) => {
           ]);
 
         const productDetails =
-          menProduct || kidProduct || womenProduct || null;
+          menProduct || kidProduct || womenProduct;
 
-        // Find matching color variant
-        const matchedVariant = productDetails?.colorVariants?.find(
-          (variant) => variant._id.toString() === productId.toString()
-        ) || null;
+        if (!productDetails) {
+          return null;
+        }
+
+        // Get only matched color variant
+        const matchedVariant = productDetails.colorVariants.find(
+          (variant) =>
+            variant._id.toString() === productId.toString()
+        );
+
+        if (!matchedVariant) {
+          return null;
+        }
 
         return {
           ...item,
@@ -54,7 +61,7 @@ const GetWishlist = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Wishlist fetched successfully",
-      wishlist: wishlistProducts,
+      wishlist: wishlistProducts.filter(Boolean),
     });
 
   } catch (error) {
