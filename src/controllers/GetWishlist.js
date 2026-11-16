@@ -4,6 +4,9 @@ import Wishlist_product from "../models/Wishlist.js";
 import MenProduct from "../models/AdminModel/MenProduct.js";
 import KidProduct from "../models/AdminModel/KidProduct.js";
 import WomenProduct from "../models/AdminModel/WomenProduct.js";
+  import TopProduct from "../models/AdminModel/TopProduct.js";
+  import ArrivalsProduct from "../models/AdminModel/Arrivals.js";
+
 
 const GetWishlist = async (req, res) => {
   try {
@@ -36,6 +39,14 @@ const GetWishlist = async (req, res) => {
           case "kid":
             ProductModel = KidProduct;
             break;
+
+                      case "Top_product":
+            ProductModel = TopProduct;
+            break;
+                      case "New_Arrivals":
+            ProductModel = ArrivalsProduct;
+            break;
+
 
           default:
             return null;
