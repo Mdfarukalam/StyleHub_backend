@@ -67,7 +67,7 @@ export const getMyOrders = async (req, res) => {
 // GET SINGLE ORDER
 export const getSingleOrder = async (req, res) => {
   try {
-    const { orderId } = req.params;
+    const { orderId } = req.query;
 
     const order = await Order.findOne({
       _id: orderId,
